@@ -1,6 +1,11 @@
-#####################
-https://github.com/coucheney/mardi_jeu_de_la_vie
-
+####################################################
+# Auteurs: 
+# Pierre Coucheney
+# Toto
+# Groupe:
+# BI 5
+# https://github.com/coucheney/mardi_jeu_de_la_vie
+###################################################
 
 #####################
 # import des modules
@@ -13,7 +18,7 @@ import tkinter as tk
 
 HAUTEUR = 400
 LARGEUR = 600
-COULEUR_FOND = "grey60"
+COULEUR_FOND = "red"
 COTE = 10
 COULEUR_QUADR = "grey20"
 
@@ -66,4 +71,5 @@ quadrillage()
 
 
 racine.mainloop()
+
 
