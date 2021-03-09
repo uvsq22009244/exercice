@@ -11,16 +11,28 @@
 # import des modules
 
 import tkinter as tk
-
+import copy
 
 #####################
 # constantes
 
 HAUTEUR = 400
 LARGEUR = 600
-COULEUR_FOND = "red"
 COTE = 10
+NB_COL = LARGEUR//COTE
+NB_LIG= HAUTEUR//COTE
+
+
+COULEUR_FOND = "red"
 COULEUR_QUADR = "grey20"
+COULEUR_CARRE = "yellow"
+
+######################
+#variables globales
+#liste à deux dimensions telle que tabeau[i][j]
+tableau = []
+
+
 
 
 ###################
@@ -39,19 +51,50 @@ def quadrillage():
         i += 1
 
 
-def xy_to_cl(x, y):
+def xy_to_ij(x, y):
     """Retourne la colonne et la ligne correspondant au point du canevas de coordonnées (x,y)"""
-    pass
+    return x//COTE, y//COTE
 
 
 def change_carre(event):
     """Change la couleur du carre à la position (event.x, event.y)"""
-    pass
+    i, j = xy_to_ij(event.x, event.y)
+    if tableau[i][j] == 0 :
+        #dessiner un carré
+        x = i * COTE
+        y = j * COTE
+        carre = canvas.create_rectangle((x,y), (x+COTE, y+COTE), fill=COULEUR_CARRE, outline=COULEUR_QUADR)
+        tableau[i][j] = carre
+    else:
+        #supprimer le carré
+        canvas.delete(tableau[i][j])
+        tableau[i][j] = 0
+    
+def nb_vivant(i, j):
+    """Retourner le nombre de cases voisines vivantes de la case de coordonnées (i, j)"""
+    return 0
 
+def etape_ij():
+    """"Fait une étape du jeu de la vie pour la case de coordonnées (i, j)
+    retourne la nouvelle valeur à mettre dans le tableau"""
+
+def etape():
+    """Fait une étape du jeu de la vie"""
+    #copie du tableau
+    tableau_res = copy.deecopy(tableau)
+    #traiter toutes les cases du tableau 
+    for i in range (NB_LIG):
+        for j in range (NB_COL):
+            tableau_res[i][j]= etape_ij()
+    #on m:odifie le tableau global
+    tableua = tableau_res
 
 
 #####################
 # programme principal
+
+for i in range(NB_LIG):
+    tableau.append([0]*NB_COL)
 
 racine = tk.Tk()
 racine.title("Jeu de la vie")
