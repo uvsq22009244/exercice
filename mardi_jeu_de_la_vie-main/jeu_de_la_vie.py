@@ -87,7 +87,7 @@ def etape():
         for j in range (NB_COL):
             tableau_res[i][j]= etape_ij()
     #on m:odifie le tableau global
-    tableua = tableau_res
+    tableau = tableau_res
 
 
 #####################

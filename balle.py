@@ -1,10 +1,11 @@
 import tkinter as tk
-
+import random 
 ##################
 # Constantes
 
 LARGEUR = 600
 HAUTEUR = 400
+cpt_rebond = 0
 
 
 ###################
@@ -31,20 +32,34 @@ def mouvement():
 
 def rebond():
     """Fait rebondir la balle sur les bords du canevas"""
-    global balle
+    global balle, cpt_rebond
     x0, y0, x1, y1 = canvas.coords(balle[0])
     if x0 <= 0 or x1 >= 600:
         balle[1] = -balle[1]
-    if y0 <= 0 or y1 >= 400:
+    if y0 <= 1 or y1 >= 400:
         balle[2] = -balle[2]
+    #if cpt_rebond < 31:
+        #cpt_rebond+=1
+        #canvas.after(30, mouvement)
 
 
+def affichage(event):
+    """Lors du clic, création de 2 ligne"""
+    rebond()
+    if event.x < LARGEUR//2 and event.x > 150//3 : 
+        canvas.move(ligne1, 1,0) # on déplace la ligne de -10px vers la gauche suivant la largeur et non la hauteur
+        canvas.move(ligne2, 1, 0)
+    
 ######################
 # programme principal
 
 racine = tk.Tk()
 canvas = tk.Canvas(racine, bg="black", width=600, height=400)
+ligne1 = canvas.create_line((LARGEUR//2, 0), (LARGEUR//2, HAUTEUR), fill= "blue")
+ligne2 = canvas.create_line((150, 0), (150, HAUTEUR), fill= "red")
+#ligne = [ligne1, ligne2]
 canvas.grid()
 balle = creer_balle()
 mouvement()
+canvas.bind("<Button-1>",affichage)
 racine.mainloop()

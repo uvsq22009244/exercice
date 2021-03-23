@@ -13,7 +13,7 @@ def affichage(event):
     else :
         canvas.move(ligne1, -10,0)
         canvas.move(ligne2, 10, 0)
-    canvas.after(180000, affichage)
+    #canvas.after(900000, affichage)
 
 creer = 1
 
@@ -36,16 +36,18 @@ def ligne_efface():
     global cpt, ligne1, ligne2
     cpt = 1 - cpt # vaut alternativement 0 et 1
     if cpt == 0:
-        ligne1 = canvas.create_line((WIDTH//2, 0), (WIDTH//2,HEIGHT), fill= "blue")
-        ligne2 = canvas.create_line((WIDTH*2//3, 0), (WIDTH*2//3,HEIGHT), fill= "red") 
-    else:
+        #ligne1 = canvas.create_line((WIDTH//2, 0), (WIDTH//2,HEIGHT), fill= "blue")
+        #ligne2 = canvas.create_line((WIDTH*2//3, 0), (WIDTH*2//3,HEIGHT), fill= "red") 
+    #else:
         canvas.delete(ligne1, ligne2)
-    #canvas.after(1000, ligne_efface)
+        canvas.after(60, affichage)
 
 racine = tk.Tk()
 canvas = tk.Canvas(racine, bg="white", width= 500, height= 500)
 ligne1 = canvas.create_line((WIDTH//2, 0), (WIDTH//2,HEIGHT), fill= "blue")
 ligne2 = canvas.create_line((WIDTH*2//3, 0), (WIDTH*2//3,HEIGHT), fill= "red")
+liste_ligne = [ligne1, ligne2]
+
 bouton1 = tk.Button(racine, text="Pause", command= restart_pause)
 bouton2 = tk.Button(racine, text= "Effacer", command= ligne_efface)
 
@@ -53,6 +55,9 @@ bouton2 = tk.Button(racine, text= "Effacer", command= ligne_efface)
 canvas.grid(row=0)
 bouton1.grid(row=1)
 bouton2.grid(row=2)
-canvas.bind("<Button-1>", affichage)
+#canvas.bind("<Button-1>", creer_ligne)
+canvas.bind("<Button-1>",affichage)
+#creer_ligne()
+ligne_efface()
 
 racine.mainloop()
